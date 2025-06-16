@@ -1,0 +1,29 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+.navbar h1 {
+  font-size: 30px;
+  color: var(--heading-color);
+  margin: 25px;
+}
+.navbar_img {
+  height: 25px;
+  width: 25pxs;
+  margin-right: 10px;
+}
+.navbar_links {
+  display: flex;
+  align-items: center;
+}
+.navbar_links a {
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin-left: 20px;
+}
+.navbar_links > a.active {
+  font-weight: 700;
+}
