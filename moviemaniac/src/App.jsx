@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./index.css";
-import "./app.css";
+import "./App.css";
 
 import Navbar from "./components/Navbar";
 import MovieList from "./components/MovieList";
