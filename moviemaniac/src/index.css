@@ -1,36 +1,91 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap");
+
+:root,
+html.dark {
+  --bg-color: #0d0f14;
+  --navbar-bg: rgba(13, 15, 20, 0.95);
+  --drawer-bg: #12141c;
+  --card-bg: #14161f;
+  --card-border: rgba(255, 255, 255, 0.08);
+  --pill-bg: #161922;
+  --ctrl-bg: #151822;
+  --search-bg: #171923;
+  --search-bg-focus: #1d202d;
+  --search-border: rgba(239, 68, 68, 0.5);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --text-primary: #ffffff;
+  --text-secondary: #9ca3af;
+  --nav-link-color: #d1d5db;
+  --user-pill-bg: rgba(255, 255, 255, 0.06);
+  --heading-color: #ffffff;
+  color-scheme: dark;
+}
+
+html.light {
+  --bg-color: #f8fafc;
+  --navbar-bg: rgba(255, 255, 255, 0.95);
+  --drawer-bg: #ffffff;
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.08);
+  --pill-bg: #f1f5f9;
+  --ctrl-bg: #f1f5f9;
+  --search-bg: #ffffff;
+  --search-bg-focus: #ffffff;
+  --search-border: rgba(239, 68, 68, 0.5);
+  --border-color: rgba(0, 0, 0, 0.08);
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --nav-link-color: #475569;
+  --user-pill-bg: rgba(0, 0, 0, 0.04);
+  --heading-color: #0f172a;
+  color-scheme: light;
+}
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: var(--bg-color);
-  transition: background-color 0.5s ease-in-out;
-
-  color: var(--color);
 }
+
 html {
   scroll-behavior: smooth;
-}
-.light {
-  --heading-color: black;
-  --color: black;
-  --bg-color: #ffffff;
-}
-
-.dark {
-  --heading-color: yellow;
-  --color: white;
-  --bg-color: #1e1e1e;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: weight;
-  font-style: normal;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
 }
-.align-center {
-  display: flex;
-  align-items: center;
+
+/* Custom Sleek Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(239, 68, 68, 0.6);
+}
+
+/* Button & input reset */
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }

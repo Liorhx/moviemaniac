@@ -1,0 +1,10 @@
+{
+  "name": "moviemaniac-root",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix moviemaniac run dev",
+    "build": "npm --prefix moviemaniac run build",
+    "preview": "npm --prefix moviemaniac run preview"
+  }
+}
+
