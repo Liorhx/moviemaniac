@@ -1,16 +1,20 @@
 .movielist_page {
   max-width: 1440px;
+  width: 100%;
   margin: 0 auto;
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 24px;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 /* Category Pills Row (Matches Screenshot) */
 .category_pills_container {
   width: 100%;
   margin-top: 4px;
+  overflow: hidden;
 }
 
 .category_pills_scroll {
@@ -22,6 +26,7 @@
   padding: 4px 2px 10px 2px;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 .category_pills_scroll::-webkit-scrollbar {
@@ -44,6 +49,7 @@
   transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
   outline: none;
   flex-shrink: 0;
+  user-select: none;
 }
 
 .category_pill_btn:hover {
@@ -62,6 +68,7 @@
 
 .pill_icon {
   color: inherit;
+  flex-shrink: 0;
 }
 
 /* Notice banner */
@@ -76,6 +83,8 @@
   color: #fca5a5;
   font-size: 13px;
   line-height: 1.4;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .notice_icon {
@@ -91,6 +100,7 @@
   flex-wrap: wrap;
   gap: 16px;
   margin-top: 6px;
+  width: 100%;
 }
 
 .section_title_wrapper {
@@ -147,6 +157,7 @@
   font-family: inherit;
   cursor: pointer;
   transition: all 0.2s ease;
+  user-select: none;
 }
 
 .rating_btn:hover {
@@ -201,12 +212,13 @@
   color: #ffffff;
 }
 
-/* Movie Cards Grid */
+/* Movie Cards Grid - Responsive Columns */
 .movie_cards_grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 20px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 /* Secondary Section */
@@ -215,6 +227,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
 }
 
 /* Loading Skeleton */
@@ -249,6 +262,8 @@
   border: 1px dashed rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   color: #9ca3af;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .clear_filter_btn {
@@ -263,18 +278,30 @@
   font-family: inherit;
 }
 
-/* Mobile & Tablet Responsiveness */
-@media (max-width: 900px) {
+/* Tablet & Mobile Responsiveness */
+@media (max-width: 1024px) {
   .movie_cards_grid {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .movielist_page {
+    padding: 16px;
+    gap: 20px;
+  }
+
+  .movie_cards_grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 14px;
   }
 }
 
 @media (max-width: 640px) {
   .movielist_page {
-    padding: 14px;
-    gap: 18px;
+    padding: 12px;
+    gap: 16px;
   }
 
   .section_heading {
@@ -283,36 +310,62 @@
 
   .section_header_row {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    gap: 12px;
   }
 
   .controls_group {
     width: 100%;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
   }
 
   .rating_filter_pills {
     width: 100%;
     overflow-x: auto;
     white-space: nowrap;
-    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 4px;
+    box-sizing: border-box;
+  }
+
+  .rating_btn {
+    flex: 1;
+    min-width: max-content;
+    justify-content: center;
   }
 
   .sort_selectors_wrapper {
     width: 100%;
-    justify-content: space-between;
+    display: flex;
+    gap: 8px;
   }
 
   .custom_select_wrapper {
     flex: 1;
+    min-width: 0;
   }
 
   .custom_select {
     width: 100%;
   }
 
+  /* Two crisp responsive columns on mobile screens */
   .movie_cards_grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .movielist_page {
+    padding: 8px;
+  }
+
+  .movie_cards_grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
   }
 }

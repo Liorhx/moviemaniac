@@ -1,7 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap");
 
+/* Default is DARK MODE */
 :root,
-html.dark {
+html,
+body,
+.dark {
   --bg-color: #0d0f14;
   --navbar-bg: rgba(13, 15, 20, 0.95);
   --drawer-bg: #12141c;
@@ -21,7 +24,10 @@ html.dark {
   color-scheme: dark;
 }
 
-html.light {
+/* Light mode overrides */
+html.light,
+body.light,
+.light {
   --bg-color: #f8fafc;
   --navbar-bg: rgba(255, 255, 255, 0.95);
   --drawer-bg: #ffffff;
@@ -52,13 +58,19 @@ html {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   background-color: var(--bg-color);
   color: var(--text-primary);
   min-height: 100vh;
+  width: 100%;
   overflow-x: hidden;
+  position: relative;
 }
 
 /* Custom Sleek Scrollbar */

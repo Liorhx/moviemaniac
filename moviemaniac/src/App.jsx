@@ -6,17 +6,44 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import MovieList from "./components/MovieList";
 
+const THEME_STORAGE_KEY = "moviemaniac_theme_mode";
+
 const App = () => {
+  // Always default to DARK MODE unless user explicitly chose light
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    const saved = localStorage.getItem("darkMode");
-    return saved !== null ? saved === "enabled" : true;
+    try {
+      const saved = localStorage.getItem(THEME_STORAGE_KEY);
+      if (saved === "light") return false;
+      return true; // Default dark
+    } catch (_) {
+      return true;
+    }
   });
 
   const [searchQuery, setSearchQuery] = useState("");
 
+  const handleToggleTheme = () => {
+    setIsDarkMode((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem(THEME_STORAGE_KEY, next ? "dark" : "light");
+      } catch (_) {}
+      return next;
+    });
+  };
+
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", isDarkMode);
-    document.documentElement.classList.toggle("light", !isDarkMode);
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+      document.body.classList.add("dark");
+      document.body.classList.remove("light");
+    } else {
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
+      document.body.classList.add("light");
+      document.body.classList.remove("dark");
+    }
   }, [isDarkMode]);
 
   return (
@@ -27,7 +54,7 @@ const App = () => {
 
       <Navbar
         isDarkMode={isDarkMode}
-        setIsDarkMode={setIsDarkMode}
+        toggleTheme={handleToggleTheme}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />

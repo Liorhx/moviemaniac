@@ -1,18 +1,11 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 import { Search, Film, Sun, Moon, User, Menu, X, Flame, Star, Sparkles, Film as MovieIcon } from "lucide-react";
 
-const Navbar = ({ isDarkMode, setIsDarkMode, searchQuery, setSearchQuery }) => {
+const Navbar = ({ isDarkMode, toggleTheme, searchQuery, setSearchQuery }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
-  const navigate = useNavigate();
-
-  const toggleTheme = () => {
-    const nextMode = !isDarkMode;
-    setIsDarkMode(nextMode);
-    localStorage.setItem("darkMode", nextMode ? "enabled" : "disabled");
-  };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +22,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode, searchQuery, setSearchQuery }) => {
         <div className="navbar_left">
           <NavLink to="/" className="brand_logo" onClick={closeMobileMenu}>
             <div className="logo_icon_wrapper">
-              <img src="/logo.png" width={300} height={30} alt="" />
+              <Film className="logo_film_icon" size={22} />
             </div>
             <span className="brand_text">
               <span className="brand_movie">Movie</span>
@@ -63,7 +56,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode, searchQuery, setSearchQuery }) => {
           </form>
         </div>
 
-        {/* Right: Nav Links + Theme Switch + User Profile */}
+        {/* Right Section: Navigation Links & Mobile Controls */}
         <div className="navbar_right">
           <nav className="desktop_nav_links">
             <NavLink
@@ -101,7 +94,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode, searchQuery, setSearchQuery }) => {
             </NavLink>
           </nav>
 
-          {/* Theme Toggle Pill */}
+          {/* Theme Toggle Pill (ALWAYS VISIBLE ON BOTH DESKTOP AND MOBILE) */}
           <button
             type="button"
             className={`theme_toggle_capsule ${isDarkMode ? "is_dark" : "is_light"}`}
@@ -118,9 +111,15 @@ const Navbar = ({ isDarkMode, setIsDarkMode, searchQuery, setSearchQuery }) => {
             <div className="theme_toggle_thumb" />
           </button>
 
+          {/* User Profile Pill (Desktop) */}
+          <div className="user_profile_pill">
+            <div className="user_avatar">
+              <User size={15} />
+            </div>
+            <span className="user_name">User</span>
+          </div>
 
-
-          {/* Mobile Search & Menu Toggle Buttons */}
+          {/* Mobile Buttons: Search & Hamburger */}
           <div className="mobile_control_buttons">
             <button
               type="button"
@@ -128,9 +127,16 @@ const Navbar = ({ isDarkMode, setIsDarkMode, searchQuery, setSearchQuery }) => {
               onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
               aria-label="Toggle mobile search"
             >
-              <Search size={20} />
+              <Search size={19} />
             </button>
-
+            <button
+              type="button"
+              className="mobile_icon_btn hamburger_btn"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
           </div>
         </div>
       </div>
@@ -161,7 +167,94 @@ const Navbar = ({ isDarkMode, setIsDarkMode, searchQuery, setSearchQuery }) => {
         </div>
       )}
 
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div className="mobile_drawer" onClick={closeMobileMenu}>
+          <div className="mobile_drawer_content" onClick={(e) => e.stopPropagation()}>
+            <div className="mobile_drawer_header">
+              <span className="brand_text">Menu</span>
+              <button
+                type="button"
+                className="mobile_close_btn"
+                onClick={closeMobileMenu}
+                aria-label="Close menu"
+              >
+                <X size={20} />
+              </button>
+            </div>
 
+            <nav className="mobile_nav_list">
+              <NavLink
+                to="/"
+                end
+                className={({ isActive }) =>
+                  isActive ? "mobile_nav_item active" : "mobile_nav_item"
+                }
+                onClick={closeMobileMenu}
+              >
+                <Flame size={18} className="mobile_item_icon" />
+                Browse & Trending
+              </NavLink>
+              <NavLink
+                to="/top_rated"
+                className={({ isActive }) =>
+                  isActive ? "mobile_nav_item active" : "mobile_nav_item"
+                }
+                onClick={closeMobileMenu}
+              >
+                <Star size={18} className="mobile_item_icon" />
+                Top Rated
+              </NavLink>
+              <NavLink
+                to="/upcoming"
+                className={({ isActive }) =>
+                  isActive ? "mobile_nav_item active" : "mobile_nav_item"
+                }
+                onClick={closeMobileMenu}
+              >
+                <Sparkles size={18} className="mobile_item_icon" />
+                Upcoming
+              </NavLink>
+              <NavLink
+                to="/my_list"
+                className={({ isActive }) =>
+                  isActive ? "mobile_nav_item active" : "mobile_nav_item"
+                }
+                onClick={closeMobileMenu}
+              >
+                <MovieIcon size={18} className="mobile_item_icon" />
+                My List
+              </NavLink>
+            </nav>
+
+            <div className="mobile_drawer_footer">
+              <div className="mobile_theme_row">
+                <span>Theme Mode</span>
+                <button
+                  type="button"
+                  className={`theme_toggle_capsule ${isDarkMode ? "is_dark" : "is_light"}`}
+                  onClick={toggleTheme}
+                >
+                  <div className="theme_icon sun_icon">
+                    <Sun size={13} />
+                  </div>
+                  <div className="theme_icon moon_icon">
+                    <Moon size={13} />
+                  </div>
+                  <div className="theme_toggle_thumb" />
+                </button>
+              </div>
+
+              <div className="mobile_user_row">
+                <div className="user_avatar">
+                  <User size={15} />
+                </div>
+                <span>Signed in as User</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 };
