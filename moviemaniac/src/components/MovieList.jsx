@@ -147,16 +147,7 @@ const MovieList = ({ type = "popular", title = "Trending Now", searchQuery = "" 
         </div>
       </div>
 
-      {/* Notice banner if carrier blocked TMDB direct API */}
-      {isFallback && (
-        <div className="offline_notice_banner">
-          <Info size={16} className="notice_icon" />
-          <span>
-            Mobile network TMDB bypass active: Instant curated HD catalog loaded
-            flawlessly without carrier timeout.
-          </span>
-        </div>
-      )}
+
 
       {/* Main Section Header & Controls */}
       <div className="section_header_row">
